@@ -22,10 +22,18 @@ l10V_vec_fun = @(tau)interp1(tau_vec,l10V_mat,tau,'linear',NaN);
 figure(1); hold on;
 plot(tau_vec,l10V_mat)
 
+% Cell arrays to store results with different contributions of asymptomatic
+% infected hosts to transmission
+
+beta_fun_vals = cell(1,4);
+prob_pos_int_mat_vals = cell(1,4);
+beta_notest_mat_vals = cell(1,4);
+beta_tot_notest_vec_vals = cell(1,4);
+
 % Loop over values of the contribution of asymptomatic infected hosts to
 % transmission
 
-for i = 1:3
+for i = 1:4
     
     asymp_rel_tot_inf = asymp_rel_tot_inf_vals(i);
 
@@ -47,27 +55,15 @@ for i = 1:3
     plot(tau_vec,beta_notest_mat)
     
     beta_tot_notest_vec = [beta_scaling_symp*beta_rel_tot_notest_symp,beta_scaling_asymp*beta_rel_tot_notest_asymp];
-
-    if i == 1
-        beta_fun1 = beta_fun;
-        prob_pos_int_mat1 = prob_pos_int_mat;
-        beta_notest_mat1 = beta_notest_mat;
-        beta_tot_notest_vec1 = beta_tot_notest_vec;
-    elseif i == 2
-        beta_fun2 = beta_fun;
-        prob_pos_int_mat2 = prob_pos_int_mat;
-        beta_notest_mat2 = beta_notest_mat;
-        beta_tot_notest_vec2 = beta_tot_notest_vec;
-    elseif i == 3
-        beta_fun3 = beta_fun;
-        prob_pos_int_mat3 = prob_pos_int_mat;
-        beta_notest_mat3 = beta_notest_mat;
-        beta_tot_notest_vec3 = beta_tot_notest_vec;
-    end
+    
+    beta_fun_vals{i} = beta_fun;
+    prob_pos_int_mat_vals{i} = prob_pos_int_mat;
+    beta_notest_mat_vals{i} = beta_notest_mat;
+    beta_tot_notest_vec_vals{i} = beta_tot_notest_vec;
 end
 
 % Save results
 
-save('../../Results/Figure_5/WH_det_inf_dynamics_asymp.mat','l10V_mat','prob_pos_int_mat1','prob_pos_int_mat2','prob_pos_int_mat3','beta_fun1','beta_fun2','beta_fun3','beta_notest_mat1','beta_notest_mat2','beta_notest_mat3','beta_tot_notest_vec1','beta_tot_notest_vec2','beta_tot_notest_vec3')
+save('../../Results/Figure_5/WH_det_inf_dynamics_asymp.mat','l10V_mat','beta_fun_vals','prob_pos_int_mat_vals','beta_notest_mat_vals','beta_tot_notest_vec_vals')
 
 rmpath('../../Functions/WH_model')

@@ -10,7 +10,7 @@ addpath('../../Functions/Analytic/')
 
 load('../../Data/params_in.mat','tau_vec')
 load('../../Data/params_asymp.mat','params_mat')
-load('../../Results/Figure_5/WH_det_inf_dynamics_asymp.mat','l10V_mat','prob_pos_int_mat1','prob_pos_int_mat2','prob_pos_int_mat3','beta_fun1','beta_fun2','beta_fun3')
+load('../../Results/Figure_5/WH_det_inf_dynamics_asymp','l10V_mat','beta_fun_vals','prob_pos_int_mat_vals')
 
 tau_inc_vec = params_mat(5,:);
 eta_vec = params_mat(6,:);
@@ -24,18 +24,10 @@ mean_test_gap_vec = (0.01:0.01:7)';
 p_outbreak_mat = zeros(length(mean_test_gap_vec),3);
 R0eff_mat = zeros(length(mean_test_gap_vec),3);
 
-for j = 1:3
+for j = 1:4
     
-    if j == 1
-        prob_pos_int_mat = prob_pos_int_mat1;
-        beta_fun = beta_fun1;
-    elseif j == 2
-        prob_pos_int_mat = prob_pos_int_mat2;
-        beta_fun = beta_fun2;
-    elseif j == 3
-        prob_pos_int_mat = prob_pos_int_mat3;
-        beta_fun = beta_fun3;
-    end
+    beta_fun = beta_fun_vals{j};
+    prob_pos_int_mat = prob_pos_int_mat_vals{j};
     
     % Loop over testing interval values
 

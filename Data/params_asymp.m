@@ -9,7 +9,7 @@ tau_inc_symp = params_WH_pop(5);
 
 % Proportion of asymptomatic hosts
 
-prob_asymp = 0.2;
+prob_asymp = 0.255;
 
 % Matrix of parameter values for symptomatic and asymptomatic infected
 % hosts
@@ -22,8 +22,6 @@ params_mat = [[params_WH_pop(1:4),params_WH_pop(1:4)];tau_inc_vec;eta_vec;prop_p
 
 % Relative infectiousness of asymptomatic hosts
 
-prop_asymp_trans_vals = [0,0.08,0.2];
-
-asymp_rel_tot_inf_vals = prop_asymp_trans_vals*(1-prob_asymp)./(prob_asymp*(1-prop_asymp_trans_vals));
+asymp_rel_tot_inf_vals = [0,0.32,1,2.773177697970119];
 
 save('params_asymp.mat','params_mat','asymp_rel_tot_inf_vals')
