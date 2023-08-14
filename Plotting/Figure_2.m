@@ -1,8 +1,13 @@
-% Produce the panels in Figure 2. The export_fig package (freely available
-% at https://github.com/altmany/export_fig) is required to save the figure
-% panels as PDF files.
+% Produce the panels in Figure 2.
 
 clear all; close all; clc;
+
+% Change the following line of code to "save_PDF = true" to save the figure
+% panels as PDF files. This functionality requires the export_fig package
+% (freely available at https://github.com/altmany/export_fig) to be
+% installed.
+
+save_PDF = false;
 
 addpath('Setup')
 addpath('../Functions/Analytic')
@@ -31,7 +36,7 @@ R0eff_vec_mtg = R0eff_vec;
 % Create plots
 
 for k = 1:6
-figsetup(k)
+    figsetup(k)
 end
 
 figure(1); hold on;
@@ -105,17 +110,19 @@ l.FontSize = 15;
 l.Position = [0.4130    0.2200    0.3850    0.0810];
 
 for k = 1:6
-figsetup(k)
+    figsetup(k)
 end
 
 % Save panels as PDF files
 
-figure(1); export_fig Figures/Figure_2/A.pdf -nocrop -transparent
-figure(2); export_fig Figures/Figure_2/B.pdf -nocrop -transparent
-figure(3); export_fig Figures/Figure_2/C.pdf -nocrop -transparent
-figure(4); export_fig Figures/Figure_2/D.pdf -nocrop -transparent
-figure(5); export_fig Figures/Figure_2/E.pdf -nocrop -transparent
-figure(6); export_fig Figures/Figure_2/F.pdf -nocrop -transparent
+if save_PDF
+    figure(1); export_fig Figures/Figure_2/A.pdf -nocrop -transparent
+    figure(2); export_fig Figures/Figure_2/B.pdf -nocrop -transparent
+    figure(3); export_fig Figures/Figure_2/C.pdf -nocrop -transparent
+    figure(4); export_fig Figures/Figure_2/D.pdf -nocrop -transparent
+    figure(5); export_fig Figures/Figure_2/E.pdf -nocrop -transparent
+    figure(6); export_fig Figures/Figure_2/F.pdf -nocrop -transparent
+end
 
 rmpath('Setup')
 rmpath('../Functions/Analytic')

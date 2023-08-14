@@ -1,8 +1,13 @@
-% Produce the panels in Figure 5. The export_fig package (freely available
-% at https://github.com/altmany/export_fig) is required to save the figure
-% panels as PDF files.
+% Produce the panels in Figure 5.
 
 clear all; close all; clc;
+ 
+% Change the following line of code to "save_PDF = true" to save the figure
+% panels as PDF files. This functionality requires the export_fig package
+% (freely available at https://github.com/altmany/export_fig) to be
+% installed.
+
+save_PDF = false;
 
 addpath('Setup')
 addpath('../Functions/Analytic')
@@ -25,7 +30,7 @@ load('../Results/Figure_2/explore_testgap.mat','mean_test_gap_vec','p_outbreak_v
 % Create plots
 
 for k = 1:3
-figsetup(k)
+    figsetup(k)
 end
 
 figure(1); hold on;
@@ -71,14 +76,16 @@ l.FontSize = 15;
 l.Position = [0.2660    0.7480    0.5180    0.2480];
 
 for k = 1:3
-figsetup(k)
+    figsetup(k)
 end
 
 % Save panels as PDF files
 
-figure(1); export_fig Figures/Figure_5/A.pdf -nocrop -transparent
-figure(2); export_fig Figures/Figure_5/B.pdf -nocrop -transparent
-figure(3); export_fig Figures/Figure_5/C.pdf -nocrop -transparent
+if save_PDF
+    figure(1); export_fig Figures/Figure_5/A.pdf -nocrop -transparent
+    figure(2); export_fig Figures/Figure_5/B.pdf -nocrop -transparent
+    figure(3); export_fig Figures/Figure_5/C.pdf -nocrop -transparent
+end
 
 rmpath('Setup')
 rmpath('../Functions/Analytic')
